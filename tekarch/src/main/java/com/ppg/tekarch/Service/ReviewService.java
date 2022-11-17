@@ -15,30 +15,26 @@ public class ReviewService {
 	@Autowired(required = false)
 	ReviewRepository rvrepo;
 	
-	//C - Create or insert a student record
+	//C - Create or insert a review
 	public ReviewEntity insertReview(ReviewEntity review) {
 		return rvrepo.save(review);
 	}
 	
-	//R - Read all records from tbl_student
+	//R - Read all reviews from tbl_review
 	public List<ReviewEntity> getAllReview(){
 		return rvrepo.findAll();
 	}
 	
-	//U - Update a student record 
+	//U - Update a review 
 	public ReviewEntity putReview(int reviewID, ReviewEntity newReviewDetails) throws Exception{
 		
 		ReviewEntity review = new ReviewEntity();
 		
 		try {
-			//Steps in updating
-			//Step 1 - search the id number of the student
-			review = rvrepo.findById(reviewID).get(); //findById() is a pre-defined method
+			review = rvrepo.findById(reviewID).get(); 
 			
-			//Step 2 - update the record
 			review.setReview(newReviewDetails.getReview());
 			
-			//Step 3 - save the information and return the value
 			return rvrepo.save(review);
 
 		} catch(NoSuchElementException nex) {
@@ -46,11 +42,11 @@ public class ReviewService {
 		}
 	}
 	
-	//D - Delete student record
+	//D - Delete review
 	public String deleteReview(int reviewID){
 		String msg;
-		if(rvrepo.findById(reviewID) != null) {	//Step 1 - find the record
-			rvrepo.deleteById(reviewID);			//Step 2 - delete the record
+		if(rvrepo.findById(reviewID) != null) {	
+			rvrepo.deleteById(reviewID);		
 			
 			msg = "Review ID " +reviewID+ " is successfully deleted!";
 		}
