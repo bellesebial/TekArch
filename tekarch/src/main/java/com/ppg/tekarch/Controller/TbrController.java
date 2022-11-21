@@ -23,37 +23,25 @@ public class TbrController {
 	@Autowired
 	TbrService bkserv;
 	
-//	//print Hello Student
-//	@GetMapping("/print")
-//	public String printHelloStudent() {
-//		return "Hello, Student!";
-//	}
-	
-	//Create or insert a student record
+	//Create or insert 
 	@PostMapping("/postBook")
 	public TbrEntity insertBook(@RequestBody TbrEntity book) {
 		return bkserv.insertBook(book);
 	}
 	
-	//Read all record
+	//Read 
 	@GetMapping("/getAllBook")
 	public List<TbrEntity> getAllBook(){
 		return bkserv.getAllBook();
 	} 
 	
-//	//Read a record by Firstname
-//	@GetMapping("/getByFirstname")
-//	public TbrEntity findByFirstname(@RequestParam String firstname) {
-//		return stserv.findByFirstname(firstname);
-//	}
-	
-	//Update a record
+	//Update 
 	@PutMapping("/putBook")
 	public TbrEntity putBook(@RequestParam int id, @RequestBody TbrEntity newBookDetails) throws Exception{
 		return bkserv.putBook(id, newBookDetails);
 	}  
 	
-	//Delete a record
+	//Delete 
 	@DeleteMapping("/deleteBook/{id}")
 	public String deleteBook (@PathVariable int id) {
 		return bkserv.deleteBook(id);
