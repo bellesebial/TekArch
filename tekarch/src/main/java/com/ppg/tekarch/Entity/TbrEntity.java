@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,13 +24,17 @@ public class TbrEntity {
 	private String synopsis;
 	private Date published;
 	
+	@ManyToOne
+	@JoinColumn(name="reviewID")
+	ReviewEntity review;
+	
 	//define default constructor
 	public TbrEntity() {
 		
 	}
 	
 	//generate constructor
-	public TbrEntity(int id, String title, String author, String genre, String synopsis, Date published) {
+	public TbrEntity(int id, String title, String author, String genre, String synopsis, Date published, ReviewEntity review) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -36,6 +42,7 @@ public class TbrEntity {
 		this.genre = genre;
 		this.synopsis = synopsis;
 		this.published = published;
+		this.review = review;
 	}
 
 	//generate setters and getters
@@ -85,5 +92,13 @@ public class TbrEntity {
 
 	public void setPublished(Date published) {
 		this.published = published;
+	}
+	
+	public ReviewEntity getReview() {
+		return review;
+	}
+
+	public void setReview(ReviewEntity review) {
+		this.review = review;
 	}
 }

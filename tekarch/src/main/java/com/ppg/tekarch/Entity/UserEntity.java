@@ -3,6 +3,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,9 +22,13 @@ public class UserEntity {
 	private String firstname;
 	private String lastname;
 	
+	@ManyToOne
+	@JoinColumn(name="reviewID")
+	ReviewEntity review;
+	
 	public UserEntity (){}
 
-	public UserEntity(String username, String password, String program, int year, String firstname, String lastname) {
+	public UserEntity(String username, String password, String program, int year, String firstname, String lastname, ReviewEntity review) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -30,6 +36,7 @@ public class UserEntity {
 		this.year = year;
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.review = review;
 	}
 
 	public String getUsername() {
@@ -80,6 +87,12 @@ public class UserEntity {
 		this.lastname = lastname;
 	} 
 	
-	
+	public ReviewEntity getReview() {
+		return review;
+	}
+
+	public void setReview(ReviewEntity review) {
+		this.review = review;
+	}
 }
 

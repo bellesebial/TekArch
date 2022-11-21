@@ -7,5 +7,4 @@ import com.ppg.tekarch.Entity.*;
 @Repository
 public interface UserRepository extends JpaRepository <UserEntity, String>{
 	
-	UserEntity findbyFirsname (String firstname);
 }
