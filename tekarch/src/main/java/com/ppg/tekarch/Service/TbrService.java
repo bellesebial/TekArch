@@ -16,27 +16,27 @@ public class TbrService {
 	@Autowired
 	TbrRepository bkrepo;
 	
-	//C - Create or insert a student record
+	//C - Create or insert 
 	public TbrEntity insertBook(TbrEntity book) {
 		return bkrepo.save(book);
 	}
 	
-	//Read all record from the table named tbl_student
+	//Read 
 	public List<TbrEntity> getAllBook(){
 		return bkrepo.findAll();
 	}
 
-	//U- Update a student record 
+	//U- Update 
 	public TbrEntity putBook(int id, TbrEntity newBookDetails) throws Exception{
 		// TODO Auto-generated method stub
 		TbrEntity book = new TbrEntity();
 		
 		try {
 			//Steps in updating
-			//Step 1 - search the id number of the student
+			//Step 1 - search the id number 
 			book = bkrepo.findById(id).get(); //findById() is a pre-defined method
 			
-			//Step 2 - update the record
+			//Step 2 - update 
 			book.setTitle(newBookDetails.getTitle());
 			book.setAuthor(newBookDetails.getAuthor());
 			book.setGenre(newBookDetails.getGenre());
@@ -51,7 +51,7 @@ public class TbrService {
 		}
 	}
 	
-	//D - Delete student record
+	//D - Delete 
 	public String deleteBook(int id) {
 		String msg;
 		
