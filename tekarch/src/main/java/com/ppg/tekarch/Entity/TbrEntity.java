@@ -28,13 +28,17 @@ public class TbrEntity {
 	@JoinColumn(name="reviewID")
 	ReviewEntity review;
 	
+	@ManyToOne
+	@JoinColumn(name="username")
+	UserEntity user;
+	
 	//define default constructor
 	public TbrEntity() {
 		
 	}
 	
 	//generate constructor
-	public TbrEntity(int id, String title, String author, String genre, String synopsis, Date published, ReviewEntity review) {
+	public TbrEntity(int id, String title, String author, String genre, String synopsis, Date published, ReviewEntity review, UserEntity user) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -43,6 +47,7 @@ public class TbrEntity {
 		this.synopsis = synopsis;
 		this.published = published;
 		this.review = review;
+		this.user = user;
 	}
 
 	//generate setters and getters
@@ -101,4 +106,14 @@ public class TbrEntity {
 	public void setReview(ReviewEntity review) {
 		this.review = review;
 	}
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
+	
+	
 }

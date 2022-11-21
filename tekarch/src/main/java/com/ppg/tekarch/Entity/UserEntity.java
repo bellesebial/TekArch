@@ -1,10 +1,14 @@
 package com.ppg.tekarch.Entity;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,9 +30,12 @@ public class UserEntity {
 	@JoinColumn(name="reviewID")
 	ReviewEntity review;
 	
+	@OneToMany(cascade = CascadeType.MERGE)
+	private Set <TbrEntity> book;
+	
 	public UserEntity (){}
 
-	public UserEntity(String username, String password, String program, int year, String firstname, String lastname, ReviewEntity review) {
+	public UserEntity(String username, String password, String program, int year, String firstname, String lastname, ReviewEntity review, Set <TbrEntity> book) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -37,6 +44,7 @@ public class UserEntity {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.review = review;
+		this.book = book;
 	}
 
 	public String getUsername() {
@@ -94,5 +102,15 @@ public class UserEntity {
 	public void setReview(ReviewEntity review) {
 		this.review = review;
 	}
+
+	public Set<TbrEntity> getBook() {
+		return book;
+	}
+
+	public void setBook(Set<TbrEntity> book) {
+		this.book = book;
+	}
+	
+	
 }
 
