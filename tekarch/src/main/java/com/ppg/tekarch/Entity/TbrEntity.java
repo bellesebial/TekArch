@@ -22,7 +22,7 @@ public class TbrEntity {
 	private String author;
 	private String genre;
 	private String synopsis;
-	private Date published;
+	private String published;
 	
 	@ManyToOne
 	@JoinColumn(name="reviewID")
@@ -38,7 +38,7 @@ public class TbrEntity {
 	}
 	
 	//generate constructor
-	public TbrEntity(int id, String title, String author, String genre, String synopsis, Date published, ReviewEntity review, UserEntity user) {
+	public TbrEntity(int id, String title, String author, String genre, String synopsis, String published, ReviewEntity review, UserEntity user) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -91,11 +91,11 @@ public class TbrEntity {
 		this.synopsis = synopsis;
 	}
 
-	public Date getPublished() {
+	public String getPublished() {
 		return published;
 	}
 
-	public void setPublished(Date published) {
+	public void setPublished(String published) {
 		this.published = published;
 	}
 	
