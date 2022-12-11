@@ -1,8 +1,10 @@
 package com.ppg.tekarch.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,12 +29,14 @@ public class UserController {
 	
 	//Create or insert a user record
 	@PostMapping("postUser")
+	@CrossOrigin(origins = "http://localhost:3000")
 	public UserEntity insertUser(@RequestBody UserEntity user) {
 		 return userve.insertUser(user);
 	}
 	
 	//Read all records
 	@GetMapping("/displayAllUser")
+	@CrossOrigin(origins = "http://localhost:3000")
 	public List<UserEntity> getAllUser(){
 		return userve.getAllUser();
 	}
@@ -40,15 +44,24 @@ public class UserController {
 	
 	//Update a record
 	 @PutMapping("/putUser")
-	 public UserEntity putUser(@RequestParam String username, @RequestBody UserEntity newUserDetails) throws Exception{
-		 return userve.putUser(username, newUserDetails);
+	 @CrossOrigin(origins = "http://localhost:3000")
+	 public UserEntity putUser(@RequestParam int userID, @RequestBody UserEntity newUserDetails) throws Exception{
+		 return userve.putUser(userID, newUserDetails);
 	 }
 	 
 	//Delete a record
-	 @DeleteMapping("/deleteUser/{username}")
-	 public String deleteUser(@PathVariable String username) {
-		 return userve.deleteUser(username);
+	 @DeleteMapping("/deleteUser/{userID}")
+	 @CrossOrigin(origins = "http://localhost:3000")
+	 public String deleteUser(@PathVariable int userID) {
+		 return userve.deleteUser(userID);
 	 }
-	
+	 
+	 //Read user by username
+	 @GetMapping("/userlogin")
+	 @CrossOrigin(origins = "http://localhost:3000")
+	 public Optional<UserEntity> findByUsername(@RequestParam String username) {
+			 return userve.findByUsername(username);
+		 
+	 }
 
 }

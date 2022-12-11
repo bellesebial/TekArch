@@ -12,13 +12,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbl_user")
+@Table(name = "tbl_useracc")
 public class UserEntity {
 	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
+	private int userID;
 	private String username;
 	private String password;
 	private String program;
@@ -35,8 +36,9 @@ public class UserEntity {
 	
 	public UserEntity (){}
 
-	public UserEntity(String username, String password, String program, int year, String firstname, String lastname, ReviewEntity review, Set <TbrEntity> book) {
+	public UserEntity(int userID, String username, String password, String program, int year, String firstname, String lastname, ReviewEntity review, Set <TbrEntity> book) {
 		super();
+		this.userID = userID;
 		this.username = username;
 		this.password = password;
 		this.program = program;
@@ -46,6 +48,16 @@ public class UserEntity {
 		this.review = review;
 		this.book = book;
 	}
+	
+	
+
+	public int getUserID() {
+		return userID;
+	}
+
+	//public void setUserID(int userId) {
+	//	this.userId = userID;
+	//}
 
 	public String getUsername() {
 		return username;

@@ -29,7 +29,7 @@ public class TbrEntity {
 	ReviewEntity review;
 	
 	@ManyToOne
-	@JoinColumn(name="username")
+	@JoinColumn(name="username", nullable = false)
 	UserEntity user;
 	
 	//define default constructor

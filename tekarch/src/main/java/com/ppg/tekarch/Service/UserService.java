@@ -2,12 +2,13 @@ package com.ppg.tekarch.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ppg.tekarch.Entity.UserEntity;
-import com.ppg.tekarch.Entity.*;
 import org.springframework.stereotype.Service;
-import com.ppg.tekarch.Repository.*;
+import com.ppg.tekarch.Repository.UserRepository;
 
 @Service
 public class UserService {
@@ -28,14 +29,14 @@ public class UserService {
 		
 		
 		//U - Update a student record
-		public UserEntity putUser(String username, UserEntity newUserDetails) throws Exception{
+		public UserEntity putUser(int userID, UserEntity newUserDetails) throws Exception{
 			
 			UserEntity user = new UserEntity();
 			
 			try {
 				//steps in updating
 				//Step 1 - search the id number of the student
-				user = urepo.findById(username).get(); //findById() is a pre-defined method
+				user = urepo.findById(userID).get(); //findById() is a pre-defined method
 				
 				//Step 2- update the record
 				user.setPassword(newUserDetails.getPassword());
@@ -43,22 +44,30 @@ public class UserService {
 				//Step 3 - save the information and return the value
 				return urepo.save(user);
 			} catch(NoSuchElementException nex) {
-				throw new Exception ("User " +username+ " does not exist!");
+				throw new Exception ("User " +userID+ " does not exist!");
 			}
 		}
 		
 		//D- Delete student record
-		public String deleteUser(String username) {
+		public String deleteUser(int userID) {
 			String msg;
-			if(urepo.findById(username) != null) {
-				urepo.deleteById(username);
+			if(urepo.findById(userID) != null) {
+				urepo.deleteById(userID);
 				
-				msg = "User " + username + " is successfully deleted!";
+				msg = "User " + userID + " is successfully deleted!";
 			}
 			else
-				msg = "User: " + username  + " is NOT found!";
+				msg = "User: " + userID  + " is NOT found!";
 			
 			return msg;
+		}
+		
+		//read user by username
+		public Optional <UserEntity> findByUsername(String username) {
+			if(urepo.findByUsername(username) !=null)
+				return Optional.ofNullable(urepo.findByUsername(username));
+			else
+				return null;
 		}
 
 	
